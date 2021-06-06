@@ -58,9 +58,13 @@ public abstract class VendingMachineItem {
 
     //methods
     public void reduceQuantity() {
-        this.quantity -= 1;
+        if (quantity == 0) {
+            System.out.println("SORRY, SOLD OUT!");
+        }
+        else this.quantity -= 1;
     }
 
+    //abstract methods--each item has to call this separately
     public abstract void dispenseItem();
 
 
