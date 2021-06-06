@@ -30,9 +30,9 @@ public class Logger {
     }
 
     //method
-    public void log(String action, String currentMoney, String remainingMoney) {
+    public void log(String action, String transactionMoney, String remainingMoney) {
         String dateTime = simpleDateFormat.format(new Date());
-        logWriter.println(dateTime + " " + action + " $" + currentMoney + " $" + remainingMoney);
+        logWriter.println(dateTime + " " + action + " $" + transactionMoney + " $" + remainingMoney);
     }
 
 }

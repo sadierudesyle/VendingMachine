@@ -1,5 +1,7 @@
 package com.techelevator.view;
 
+import java.math.BigDecimal;
+
 public abstract class VendingMachineItem {
 
     //properties
@@ -7,13 +9,13 @@ public abstract class VendingMachineItem {
     private String type;
     private String sound;
     private String name;
-    private String price;
+    private BigDecimal price;
     private int quantity;
 
 
     //constructor
     public VendingMachineItem(String slot, String type, String sound, String name,
-                              String price, int quantity) {
+                              BigDecimal price, int quantity) {
         this.slot = slot;
         this.type = type;
         this.sound = sound;
@@ -43,7 +45,7 @@ public abstract class VendingMachineItem {
         return this.name;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return this.price;
     }
 
@@ -51,10 +53,10 @@ public abstract class VendingMachineItem {
         return this.quantity;
     }
 
-//    //setters
-//    public void setQuantity(int quantity) {
-//        this.quantity = quantity;
-//    }
+    //setters
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     //methods
     public void reduceQuantity() {

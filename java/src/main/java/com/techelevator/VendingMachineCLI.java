@@ -71,36 +71,35 @@ public class VendingMachineCLI {
 							money.displayCurrentBalance();
 							String feedChoice = (String) menu.getChoiceFromOptions(FEED_MONEY_MENU_OPTIONS);
 							if (feedChoice.equals(ONE_DOLLAR_BILL)) {
-								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+								logger.log("FEED MONEY: ", "1.00",
 										money.getUserBalance().add(BigDecimal.valueOf(1.00)).toString());
 								money.addMoney(BigDecimal.valueOf(1.00));
 							} else if (feedChoice.equals(TWO_DOLLAR_BILL)) {
-								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+								logger.log("FEED MONEY: ", "2.00",
 										money.getUserBalance().add(BigDecimal.valueOf(2.00)).toString());
 								money.addMoney(BigDecimal.valueOf(2.00));
 							} else if (feedChoice.equals(FIVE_DOLLAR_BILL)) {
-								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+								logger.log("FEED MONEY: ", "5.00",
 										money.getUserBalance().add(BigDecimal.valueOf(5.00)).toString());
 								money.addMoney(BigDecimal.valueOf(5.00));
 							} else if (feedChoice.equals(TEN_DOLLAR_BILL)) {
-								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+								logger.log("FEED MONEY: ", "10.00",
 										money.getUserBalance().add(BigDecimal.valueOf(10.00)).toString());
 								money.addMoney(BigDecimal.valueOf(10.00));
 							} else if (feedChoice.equals(TWENTY_DOLLAR_BILL)) {
-								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+								logger.log("FEED MONEY: ", "20.00",
 										money.getUserBalance().add(BigDecimal.valueOf(20.00)).toString());
 								money.addMoney(BigDecimal.valueOf(20.00));
 							} else if (feedChoice.equals(FIFTY_DOLLAR_BILL)) {
-								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+								logger.log("FEED MONEY: ", "50.00",
 										money.getUserBalance().add(BigDecimal.valueOf(50.00)).toString());
 								money.addMoney(BigDecimal.valueOf(50.00));
 							} else if (feedChoice.equals(HUNDRED_DOLLAR_BILL)) {
-								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+								logger.log("FEED MONEY: ", "100.00",
 										money.getUserBalance().add(BigDecimal.valueOf(100.00)).toString());
 								money.addMoney(BigDecimal.valueOf(100.00));
 							} else if (feedChoice.equals(BACK_TO_MENU)) {
 								feed = false;
-								menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 							}
 						}
 					}
@@ -110,8 +109,54 @@ public class VendingMachineCLI {
 
 					else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
 						//Select product options
-						
-					}
+
+						inventory.displayItems();
+
+						Scanner scanner = new Scanner(System.in);
+
+						System.out.print("\nPlease input product slot: ");
+						String userSelection = scanner.nextLine().toUpperCase();
+
+						boolean validSlot = false;
+
+						for (Map.Entry<String, VendingMachineItem> entry : inventory.mapFromList().entrySet()) {
+							if (userSelection.equalsIgnoreCase(entry.getKey())) {
+								validSlot = true;
+							}
+						}
+
+						if (validSlot) {
+
+
+						for (VendingMachineItem key : inventory.mapFromList().values()) {
+							if (key.getSlot().equalsIgnoreCase(userSelection)) {
+
+								if (key.getPrice().compareTo(money.getUserBalance()) >= 0) {
+									System.out.println("\nSorry, you have insufficient funds. Add more money to proceed.");
+									break;
+								} else if (key.getQuantity() <= 0) {
+									System.out.println("Sorry, we're sold out!");
+									break;
+								} else {
+									key.dispenseItem();
+									this.money.subtractMoney(key.getPrice());
+									key.setQuantity(key.getQuantity() - 1);
+
+									System.out.println("Your current balance is $" + this.money.getUserBalance());
+									logger.log(key.getName() + " " + key.getSlot(), this.money.getUserBalance().toString(),
+											this.money.getUserBalance().subtract(key.getPrice()).toString());
+									menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+								}
+							}
+						}
+
+
+							} else if (!validSlot) {
+								System.out.println("\nOops! Invalid slot entry.");
+							}
+
+
+						}
 
 
 
@@ -122,14 +167,16 @@ public class VendingMachineCLI {
 					else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 						//Finish transaction--makes you hit this button twice?
 						logger.log("GIVE CHANGE", money.getUserBalance().toString(), "0.00");
-						money.giveChange();
+						money.giveChange(money);
+						System.out.println("\nTransaction complete. Back to Main Menu:");
+						purchase = false;
 					}
 				}
 
 
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				System.out.println("\nTransaction complete.\nThank you for stopping by!");
-				System.exit(1);
+				System.exit(0);
 			}
 		}
 	}

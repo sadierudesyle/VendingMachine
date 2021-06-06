@@ -41,7 +41,7 @@ public class Money {
     }
 
     //Give change
-    public void giveChange () {
+    public void giveChange (Money money) {
             BigDecimal quarter = new BigDecimal("0.25");
             BigDecimal dime = new BigDecimal("0.10");
             BigDecimal nickel = new BigDecimal("0.05");
@@ -52,7 +52,7 @@ public class Money {
             BigDecimal dimeRemainder = this.userBalance.remainder(dime);
             BigDecimal nickelsChange = dimeRemainder.divideToIntegralValue(nickel);
 
-            System.out.println("Your change: " + quartersChange + " Quarters, " +
+            System.out.println("\nYour change is: " + quartersChange + " Quarters, " +
                     dimesChange + " Dimes, and " + nickelsChange + " Nickels.");
 
             this.userBalance = BigDecimal.valueOf(0.00).setScale(2);

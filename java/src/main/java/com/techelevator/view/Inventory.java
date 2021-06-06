@@ -2,6 +2,7 @@ package com.techelevator.view;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.util.*;
 
 
@@ -32,16 +33,20 @@ public class Inventory {
     public Map<String, VendingMachineItem> mapFromList() {
         for (String[] item : inventoryList) {
             if (item[3].equalsIgnoreCase("Candy")) {
-                Candy candy = new Candy(item[0], item[1], item[2]);
+                BigDecimal candyValue = new BigDecimal(item[2]);
+                Candy candy = new Candy(item[0], item[1], candyValue);
                 inventoryMap.put(item[0], candy);
             } else if (item[3].equalsIgnoreCase("Chip")) {
-                Chips chips = new Chips(item[0], item[1], item[2]);
+                BigDecimal chipValue = new BigDecimal(item[2]);
+                Chips chips = new Chips(item[0], item[1], chipValue);
                 inventoryMap.put(item[0], chips);
             } else if (item[3].equalsIgnoreCase("Drink")) {
-                Beverage beverage = new Beverage(item[0], item[1], item[2]);
+                BigDecimal drinkValue = new BigDecimal(item[2]);
+                Beverage beverage = new Beverage(item[0], item[1], drinkValue);
                 inventoryMap.put(item[0], beverage);
             } else if (item[3].equalsIgnoreCase("Gum")) {
-                Gum gum = new Gum(item[0], item[1], item[2]);
+                BigDecimal gumValue = new BigDecimal(item[2]);
+                Gum gum = new Gum(item[0], item[1], gumValue);
                 inventoryMap.put(item[0], gum);
             }
         } return inventoryMap;
