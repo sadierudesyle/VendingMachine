@@ -1,8 +1,10 @@
 package com.techelevator;
 
-import com.techelevator.view.Inventory;
-import com.techelevator.view.Menu;
-import com.techelevator.view.Money;
+import com.techelevator.view.*;
+
+import java.math.BigDecimal;
+import java.util.Map;
+import java.util.Scanner;
 
 public class VendingMachineCLI {
 
@@ -36,7 +38,7 @@ public class VendingMachineCLI {
 
 	private Inventory inventory = new Inventory();
 	private Money money = new Money();
-	//private Logger logger = new Logger();
+	private Logger logger = new Logger();
 
 
 	private Menu menu;
@@ -55,10 +57,77 @@ public class VendingMachineCLI {
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				inventory.displayItems();
+
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				// do purchase
+				boolean purchase = true;
+				while (purchase) {
+					money.displayCurrentBalance();
+					String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+
+
+					if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
+						boolean feed = true;
+						while (feed) {
+							money.displayCurrentBalance();
+							String feedChoice = (String) menu.getChoiceFromOptions(FEED_MONEY_MENU_OPTIONS);
+							if (feedChoice.equals(ONE_DOLLAR_BILL)) {
+								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+										money.getUserBalance().add(BigDecimal.valueOf(1.00)).toString());
+								money.addMoney(BigDecimal.valueOf(1.00));
+							} else if (feedChoice.equals(TWO_DOLLAR_BILL)) {
+								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+										money.getUserBalance().add(BigDecimal.valueOf(2.00)).toString());
+								money.addMoney(BigDecimal.valueOf(2.00));
+							} else if (feedChoice.equals(FIVE_DOLLAR_BILL)) {
+								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+										money.getUserBalance().add(BigDecimal.valueOf(5.00)).toString());
+								money.addMoney(BigDecimal.valueOf(5.00));
+							} else if (feedChoice.equals(TEN_DOLLAR_BILL)) {
+								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+										money.getUserBalance().add(BigDecimal.valueOf(10.00)).toString());
+								money.addMoney(BigDecimal.valueOf(10.00));
+							} else if (feedChoice.equals(TWENTY_DOLLAR_BILL)) {
+								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+										money.getUserBalance().add(BigDecimal.valueOf(20.00)).toString());
+								money.addMoney(BigDecimal.valueOf(20.00));
+							} else if (feedChoice.equals(FIFTY_DOLLAR_BILL)) {
+								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+										money.getUserBalance().add(BigDecimal.valueOf(50.00)).toString());
+								money.addMoney(BigDecimal.valueOf(50.00));
+							} else if (feedChoice.equals(HUNDRED_DOLLAR_BILL)) {
+								logger.log("FEED MONEY: ", money.getUserBalance().toString(),
+										money.getUserBalance().add(BigDecimal.valueOf(100.00)).toString());
+								money.addMoney(BigDecimal.valueOf(100.00));
+							} else if (feedChoice.equals(BACK_TO_MENU)) {
+								feed = false;
+								menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+							}
+						}
+					}
+
+
+
+
+					else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
+						//Select product options
+						
+					}
+
+
+
+
+
+
+
+					else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+						//Finish transaction--makes you hit this button twice?
+						logger.log("GIVE CHANGE", money.getUserBalance().toString(), "0.00");
+						money.giveChange();
+					}
+				}
+
+
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
-				// close program
 				System.out.println("\nTransaction complete.\nThank you for stopping by!");
 				System.exit(1);
 			}
@@ -71,6 +140,8 @@ public class VendingMachineCLI {
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
 	}
+
+
 
 	//call purchase menu (extend menu):
 	//1. Feed Money (calls from Money class)

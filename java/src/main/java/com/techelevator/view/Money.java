@@ -25,7 +25,7 @@ public class Money {
 
     //Add money
     public BigDecimal addMoney(BigDecimal addedMoney) {
-        this.userBalance = userBalance.add(addedMoney);
+        this.userBalance = this.userBalance.add(addedMoney);
         return userBalance;
     }
 
@@ -52,8 +52,8 @@ public class Money {
             BigDecimal dimeRemainder = this.userBalance.remainder(dime);
             BigDecimal nickelsChange = dimeRemainder.divideToIntegralValue(nickel);
 
-            System.out.println("Your change: " + quartersChange + "Quarters, " +
-                    dimesChange + "Dimes, and " + nickelsChange + " Nickels.");
+            System.out.println("Your change: " + quartersChange + " Quarters, " +
+                    dimesChange + " Dimes, and " + nickelsChange + " Nickels.");
 
             this.userBalance = BigDecimal.valueOf(0.00).setScale(2);
         }
