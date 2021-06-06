@@ -1,27 +1,179 @@
 package com.techelevator.view;
 
-
-import com.techelevator.VendingMachineCLI;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class Inventory extends VendingMachineItem{
+
+public class Inventory {
+
+    List <String[]> inventoryList = new ArrayList<>();
+    Map<String, VendingMachineItem> inventoryMap = new TreeMap<>();
+    File inventory = new File("vendingmachine.csv");
+
+    //turning vendingmachine.csv into a List of String[]
+    public List <String[]> listFromFile() {
+
+        try (Scanner scanner = new Scanner(inventory)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] inventoryArray = line.split("\\|");
+                inventoryList.add(inventoryArray);
+                }
+            } catch (FileNotFoundException e) {
+            System.out.println("Sorry, we're having a problem stocking inventory!");
+        } catch (Exception ex) {
+            System.out.println("Sorry, try again! An error has occurred!");
+            //ex.printStackTrace();
+        } return inventoryList;
+    }
+
+    //turning inventory List<String[]> above into TreeMap (key: slot, value: VMItem)
+    public Map<String, VendingMachineItem> mapFromList() {
+        for (String[] item : inventoryList) {
+            if (item[3].equalsIgnoreCase("Candy")) {
+                Candy candy = new Candy(item[0], item[1], item[2]);
+                inventoryMap.put(item[0], candy);
+            } else if (item[3].equalsIgnoreCase("Chip")) {
+                Chips chips = new Chips(item[0], item[1], item[2]);
+                inventoryMap.put(item[0], chips);
+            } else if (item[3].equalsIgnoreCase("Drink")) {
+                Beverage beverage = new Beverage(item[0], item[1], item[2]);
+                inventoryMap.put(item[0], beverage);
+            } else if (item[3].equalsIgnoreCase("Gum")) {
+                Gum gum = new Gum(item[0], item[1], item[2]);
+                inventoryMap.put(item[0], gum);
+            }
+        } return inventoryMap;
+    }
+
+    //Inventory method: display items
+    public void displayItems() {
+        for (String key : inventoryMap.keySet()) {
+            System.out.println(key + inventoryMap.get(key).getName() +
+            " $ " + inventoryMap.get(key).getPrice() + " Quantity: " +
+                    inventoryMap.get(key).getQuantity());
+        }
+    }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//public Map<VendingMachineItem> displayInventory()throws FileNotFoundException{
+//        Map<VendingMachineItem> itemList=new TreeMap();
+//        File file=new File("vendingmachine.csv");
+//        Scanner fileInput=new Scanner(file);
+//
+//        while(fileInput.hasNextLine()){
+//        String line=fileInput.nextLine();
+//        String[]inputInfo=line.split("\\|");
+//        }
+//
+//        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    private String slot;
 //    private String name;
 //    private Double price;
 //    private String type;
 //    private TreeMap<String, Double> inventoryMap;
 
-    public Inventory (TreeMap<String, String> inventoryMap, String slot, String nameAndPrice) {
-        super(slot, nameAndPrice, inventoryMap);
+//    public Inventory (TreeMap<String, String> inventoryMap, String slot, String nameAndPrice) {
+//        super(slot, nameAndPrice, inventoryMap);
 //        this.inventoryMap = inventoryMap;
 //        this.slot = slot;
 //        this.name = name;
 //        this.price = price;
 //        this.type = type;
-    }
 
 //    public String getSlot() {
 //        return slot;
@@ -102,7 +254,7 @@ public class Inventory extends VendingMachineItem{
 //        inventoryMap.put(name, price);
 //    }
 //}
-}
+//}
 
 
 

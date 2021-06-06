@@ -1,10 +1,16 @@
 package com.techelevator.view;
 
-import java.util.TreeMap;
-
 public class Candy extends VendingMachineItem {
 
-    public Candy(String slot, String nameAndPrice, TreeMap<String, String> inventoryMap) {
-        super(slot, nameAndPrice, inventoryMap);
+    public Candy(String slot, String name, String price) {
+        super(slot, "Candy", "Munch Much, Yum!", name, price, 5);
     }
+
+    @Override
+    public void dispenseItem() {
+
+        System.out.println("Enjoy your purchase: " + getName() + "for $" + getPrice()
+        + "! " + this.getSound());
+    }
+
 }
