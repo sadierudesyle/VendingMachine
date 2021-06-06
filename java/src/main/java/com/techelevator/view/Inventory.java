@@ -8,6 +8,28 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Inventory {
+    private String slot;
+    private String name;
+    private Double price;
+    private String type;
+    private TreeMap<String, Double> inventoryMap = new TreeMap<String, Double>();
+
+    public Inventory (String slot, String name, Double price, String type) {
+        this.slot = slot;
+        this.name = name;
+        this.price = price;
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+
 
     //properties
     //private Map = new TreeMap<String, String>();
@@ -23,6 +45,11 @@ public class Inventory {
             while (scanner.hasNextLine()) {
                 String output = scanner.nextLine();
                 System.out.println(output);
+                String[] newItems = output.split("//|");
+                System.out.println(newItems);
+//                for (int i = 0; i < newItems.length; i++) {
+//
+//                }
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
