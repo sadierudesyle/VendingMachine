@@ -50,8 +50,8 @@ public class Inventory {
     //Inventory method: display items
     public void displayItems() {
         for (String key : inventoryMap.keySet()) {
-            System.out.println(key + inventoryMap.get(key).getName() +
-            " $ " + inventoryMap.get(key).getPrice() + " Quantity: " +
+            System.out.println(key.toString() + " " + inventoryMap.get(key).getName() +
+            " $" + inventoryMap.get(key).getPrice() + " Quantity: " +
                     inventoryMap.get(key).getQuantity());
         }
     }

@@ -20,6 +20,19 @@ public class VendingMachineCLI {
 	private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_FEED_MONEY,
 	PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTION};
 
+	//Feed Money Menu
+	private static final String ONE_DOLLAR_BILL = "$1";
+	private static final String TWO_DOLLAR_BILL = "$2";
+	private static final String FIVE_DOLLAR_BILL = "$5";
+	private static final String TEN_DOLLAR_BILL = "$10";
+	private static final String TWENTY_DOLLAR_BILL = "$20";
+	private static final String FIFTY_DOLLAR_BILL = "$50";
+	private static final String HUNDRED_DOLLAR_BILL = "$100";
+	private static final String BACK_TO_MENU = "Back to Purchase Menu";
+	private static final String[] FEED_MONEY_MENU_OPTIONS = {ONE_DOLLAR_BILL, TWO_DOLLAR_BILL,
+	FIVE_DOLLAR_BILL, TEN_DOLLAR_BILL, TWENTY_DOLLAR_BILL, FIFTY_DOLLAR_BILL,
+	HUNDRED_DOLLAR_BILL, BACK_TO_MENU};
+
 
 	private Inventory inventory = new Inventory();
 	private Money money = new Money();
@@ -36,7 +49,7 @@ public class VendingMachineCLI {
 	public void run() {
 		inventory.listFromFile();
 		inventory.mapFromList(); //restocking
-		System.out.println("Try the new Vendo-Matic 800, presented by Umbrella Corp.!");
+		System.out.println("\nTry the new Vendo-Matic 800, presented by Umbrella Corp.!");
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
@@ -46,6 +59,7 @@ public class VendingMachineCLI {
 				// do purchase
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				// close program
+				System.out.println("\nTransaction complete.\nThank you for stopping by!");
 				System.exit(1);
 			}
 		}
