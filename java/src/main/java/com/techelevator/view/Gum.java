@@ -1,9 +1,10 @@
 package com.techelevator.view;
 
+import java.util.TreeMap;
+
 public class Gum extends VendingMachineItem {
 
-    public Gum(String name, double price, String type, String slotLocation, String message) {
-        super(name, price, "Gum", slotLocation, "Chew Chew, Yum!");
+    public Gum(String slot, String nameAndPrice, TreeMap<String, String> inventoryMap) {
+        super(slot, nameAndPrice, inventoryMap);
     }
-
 }

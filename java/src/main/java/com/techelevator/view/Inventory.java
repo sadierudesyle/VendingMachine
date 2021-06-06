@@ -1,33 +1,47 @@
 package com.techelevator.view;
 
 
+import com.techelevator.VendingMachineCLI;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
-public class Inventory {
-    private String slot;
-    private String name;
-    private Double price;
-    private String type;
-    private TreeMap<String, Double> inventoryMap = new TreeMap<String, Double>();
+public class Inventory extends VendingMachineItem{
+//    private String slot;
+//    private String name;
+//    private Double price;
+//    private String type;
+//    private TreeMap<String, Double> inventoryMap;
 
-    public Inventory (String slot, String name, Double price, String type) {
-        this.slot = slot;
-        this.name = name;
-        this.price = price;
-        this.type = type;
+    public Inventory (TreeMap<String, String> inventoryMap, String slot, String nameAndPrice) {
+        super(slot, nameAndPrice, inventoryMap);
+//        this.inventoryMap = inventoryMap;
+//        this.slot = slot;
+//        this.name = name;
+//        this.price = price;
+//        this.type = type;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
+//    public String getSlot() {
+//        return slot;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public Double getPrice() {
+//        return price;
+//    }
+//
+//    public String getType() {
+//        return type;
+//    }
+//
+//    public TreeMap<String, Double> getInventoryMap() {
+//        return inventoryMap;
+//    }
 
 
 
@@ -37,29 +51,59 @@ public class Inventory {
     //getters/setters? -- optional
 
     //method
-    public static void main(String[] args) {
-
-        File inventory = new File("vendingmachine.csv");
-
-        try (Scanner scanner = new Scanner(inventory)) {
-            while (scanner.hasNextLine()) {
-                String output = scanner.nextLine();
-                System.out.println(output);
-                String[] newItems = output.split("//|");
-                System.out.println(newItems);
-//                for (int i = 0; i < newItems.length; i++) {
+//    public void main(String[] args) {
 //
-//                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+//        File inventory = new File("vendingmachine.csv");
+//
+//        try (Scanner scanner = new Scanner(inventory)) {
+//            while (scanner.hasNextLine()) {
+//                String output = scanner.nextLine();
+//                System.out.println(output);
+//                String[] newItems = output.split("//|");
+//                System.out.println(Arrays.toString(newItems));
+////                for (int i = 0; i < newItems.length; i++) {
+////
+////                }
+//            }
+//        } catch (FileNotFoundException e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//
+//    }
 
-    }
 
-    //displayInventory()
-
+//    private void inventoryMap() {
+//
+//        for (getName : getPrice) {
+//
+//            String[] inventory = snackLine.split("[|]");
+//            String slot = inventory[0];
+//            String name = inventory[1];
+//            double price = Double.parseDouble((inventory[2]));
+//            if (slot.startsWith("A")) {
+//                Chips item = new Chips(name, price);
+//                (inventoryMap, slot, item);
+//            } else if (slot.startsWith("B")) {
+//                Candy item = new Candy(name, price);
+//                itemLoader(inventoryMap, slot, item);
+//            } else if (slot.startsWith("C")) {
+//                Beverage item = new Beverage(name, price);
+//                itemLoader(inventoryMap, slot, item);
+//            } else if (slot.startsWith("D")) {
+//                Gum item = new Gum(name, price);
+//                itemLoader(inventoryMap, slot, item);
+//            }
+//
+//        }
+//
+//public void displayItem(TreeMap<String, Double> inventoryMap, String name, Double price) {
+//    for (int i = 0; i < 5; i++) {
+//        inventoryMap.put(name, price);
+//    }
+//}
 }
+
 
 
 

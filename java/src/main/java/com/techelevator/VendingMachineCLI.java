@@ -22,7 +22,7 @@ public class VendingMachineCLI {
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
-//				Inventory();
+//				System.out.println();
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
@@ -31,6 +31,7 @@ public class VendingMachineCLI {
 			}
 		}
 	}
+
 
 	public static void main(String[] args) {
 		Menu menu = new Menu(System.in, System.out);
