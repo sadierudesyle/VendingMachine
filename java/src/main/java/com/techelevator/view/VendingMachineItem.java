@@ -1,5 +1,7 @@
 package com.techelevator.view;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.math.BigDecimal;
 
 public abstract class VendingMachineItem {
@@ -59,11 +61,13 @@ public abstract class VendingMachineItem {
     }
 
     //methods
-    public void reduceQuantity() {
-        if (quantity == 0) {
-            System.out.println("SORRY, SOLD OUT!");
+    public int reduceQuantity() {
+        if (quantity > 0) {
+            this.quantity -= 1;
         }
-        else this.quantity -= 1;
+        else {
+            System.out.println(("SORRY, SOLD OUT!"));
+        } return quantity;
     }
 
     //abstract methods--each item has to call this separately

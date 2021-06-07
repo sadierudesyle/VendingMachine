@@ -2,6 +2,9 @@ package com.techelevator;
 
 import com.techelevator.view.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Scanner;
@@ -45,6 +48,7 @@ public class VendingMachineCLI {
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
+
 
 
 
@@ -127,28 +131,39 @@ public class VendingMachineCLI {
 
 						if (validSlot) {
 
+							for (VendingMachineItem key : inventory.mapFromList().values()) {
 
-						for (VendingMachineItem key : inventory.mapFromList().values()) {
-							if (key.getSlot().equalsIgnoreCase(userSelection)) {
+								if (key.getSlot().equalsIgnoreCase(userSelection)) {
 
-								if (key.getPrice().compareTo(money.getUserBalance()) >= 0) {
-									System.out.println("\nSorry, you have insufficient funds. Add more money to proceed.");
-									break;
-								} else if (key.getQuantity() <= 0) {
-									System.out.println("Sorry, we're sold out!");
-									break;
-								} else {
-									key.dispenseItem();
-									this.money.subtractMoney(key.getPrice());
-									key.setQuantity(key.getQuantity() - 1);
+									if (key.getPrice().compareTo(money.getUserBalance()) >= 0) {
+										System.out.println("\nSorry, you have insufficient funds. Add more money to proceed.");
+										break;
+									} else if (key.getQuantity() <= 0) {
+										System.out.println("Sorry, we're sold out!");
+										break;
+									} else {
+										key.dispenseItem();
+										key.reduceQuantity();
+										this.money.subtractMoney(key.getPrice());
+//										if (key.getQuantity() > 0) {
+//											key.dispenseItem();
+//											this.money.subtractMoney(key.getPrice());
+//											try (PrintWriter write = new PrintWriter(String.valueOf(inventory))) {
+//												write.println(userSelection.replaceAll(String.valueOf(key.getQuantity()), String.valueOf(key.reduceQuantity())));
+//											} catch (FileNotFoundException e) {
+//												System.out.println(e.getMessage());
+//											}
+//										}
 
-									System.out.println("Your current balance is $" + this.money.getUserBalance());
-									logger.log(key.getName() + " " + key.getSlot(), this.money.getUserBalance().toString(),
-											this.money.getUserBalance().subtract(key.getPrice()).toString());
-									menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+//									key.setQuantity(key.reduceQuantity());
+
+//									System.out.println("Your current balance is $" + this.money.getUserBalance());
+//									logger.log(key.getName() + " " + key.getSlot(), this.money.getUserBalance().toString(),
+//											this.money.getUserBalance().subtract(key.getPrice()).toString());
+//									menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+									}
 								}
 							}
-						}
 
 
 							} else if (!validSlot) {

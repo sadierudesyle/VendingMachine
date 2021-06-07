@@ -20,7 +20,7 @@ public class Money {
     //Methods
     //Display balance
     public void displayCurrentBalance() {
-        System.out.println("Current Money Provided: " + getUserBalance());
+        System.out.println("Current Money Provided: $" + getUserBalance());
     }
 
     //Add money

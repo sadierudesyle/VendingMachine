@@ -61,6 +61,18 @@ public class Inventory {
         }
     }
 
+    public void outOfStock() {
+        for (String key : inventoryMap.keySet()) {
+            inventoryMap.get(key).getQuantity();
+        }
+
+    }
+
+//    public void getDecreaseQuantity() {
+//        Integer stock = 5;
+//        Integer itemPurchased = stock - 1;
+//    }
+
 
     }
 
